@@ -1,0 +1,50 @@
+# Your solution here
+
+# In the case of the cat, the edge detection seems to work quite well because the contours are clear and there are not
+# many shadows. We tested differented values for sigma (in the case of Canny) and with sigma = 2 the results are
+# quite good.
+
+from skimage.filters import roberts, prewitt, sobel
+from skimage.feature import canny
+
+cat = io.imread('images/cat.jpg')
+gs_cat = rgb2gray(cat)
+
+f, ax = plt.subplots(2, 3, figsize=(15, 10))
+
+sb_roberts = roberts(gs_cat)
+ax[0][0].set_title('Roberts')
+ax[0][0].imshow(sb_roberts, cmap='gray')
+
+sb_prewitt = prewitt(gs_cat)
+ax[0][1].set_title('Prewitt')
+ax[0][1].imshow(sb_prewitt, cmap='gray')
+
+sb_sobel = sobel(gs_cat)
+ax[0][2].set_title('Sobel')
+ax[0][2].imshow(sb_sobel, cmap='gray')
+
+sb_canny = canny(gs_cat, sigma=1)
+ax[1][0].set_title('Canny (sigma = 1)')
+ax[1][0].imshow(sb_canny, cmap='gray')
+
+sb_canny = canny(gs_cat, sigma=2)
+ax[1][1].set_title('Canny (sigma = 2)')
+ax[1][1].imshow(sb_canny, cmap='gray')
+
+sb_canny = canny(gs_cat, sigma=3)
+ax[1][2].set_title('Canny (sigma = 3)')
+ax[1][2].imshow(sb_canny, cmap='gray')
+
+plt.show()
+
+# Question: Which are the limitations of the different images contour extraction?
+# Answer: 
+# In general, the methods that we have applied are low-level (based on the gradients and so on), not semantic
+# (unlike deep learning methods like HED). However, these methods don't need training data and are simple.
+# Apart from that, specifically to the methods we have used:
+# Roberts:
+
+# Sobel, Prewitt: Although they are fast, they are sensitive to noise.
+# Canny: Canny can , but it is not that fast
+# and needs to set parameters (sigma).
