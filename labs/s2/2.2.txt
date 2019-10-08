@@ -1,0 +1,7 @@
+# Your solution here
+import scipy.ndimage 
+im_to_convolve = peppers.copy()
+image_convolved = im_to_convolve.copy()
+mask_m2d = np.ones(shape=(15, 15))
+convolve_RGB_image(im_to_convolve, mask_m2d, image_convolved)
+plt.imshow(image_convolved)
