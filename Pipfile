@@ -12,6 +12,7 @@ matplotlib = "*"
 ipykernel = "*"
 jupyter = "*"
 ipython = "*"
+joblib = "*"
 
 [requires]
 python_version = "3.7"
